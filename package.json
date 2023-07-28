@@ -11,7 +11,7 @@
   "scripts": {
     "copy:views": "copyfiles -u 1 ./views/**/* ./dist/views",
     "copy:static": "copyfiles -u 1 ./public/**/* ./dist/public",
-    "preinstall": "tsc && npm run copy:views && npm run copy:static",
+    "build": "tsc && npm run copy:views && npm run copy:static",
     "start": "env-cmd -f .env.production node ./dist/index.js",
     "dev": "env-cmd -f .env.development nodemon index.ts",
     "prisma:migrate": "env-cmd -f .env.development npx prisma migrate dev --name",
