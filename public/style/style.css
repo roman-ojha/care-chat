@@ -1,0 +1,37 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(19, 27, 39);
+}
+
+#main-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#main-heading {
+  margin: 20px 0px 20px 0px;
+}
+
+#chat-container {
+  width: 50vw;
+  height: 80vh;
+  border: 3px solid white;
+  border-radius: 10px;
+}
+
+#chat-container div {
+}
+
+#chat-container form input[type="text"] {
+  background-color: transparent;
+}
