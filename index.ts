@@ -8,6 +8,7 @@ import { createServer } from "http";
 import socketCookieParser from "socket.io-cookie-parser";
 import bodyParser from "body-parser";
 import { handleSocket } from "./socket.js";
+import { connect } from "./config/prisma.js";
 
 const app = express();
 const server = createServer(app);
@@ -30,5 +31,6 @@ handleSocket(io);
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+connect();
 
 // db.end();

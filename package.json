@@ -7,7 +7,10 @@
   "type": "module",
   "scripts": {
     "start": "env-cmd -f .env.production ts-node index.ts",
-    "dev": "env-cmd -f .env nodemon index.ts"
+    "dev": "env-cmd -f .env.development nodemon index.ts",
+    "prisma:migrate": "env-cmd -f .env.development npx prisma migrate dev --name",
+    "prisma:generate": "npx prisma generate",
+    "prisma:studio": "env-cmd -f .env.development npx prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
