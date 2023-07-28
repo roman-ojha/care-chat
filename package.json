@@ -1,7 +1,7 @@
 {
   "name": "message_app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "author": "roman-ojha",
   "license": "MIT",
   "type": "module",
@@ -9,7 +9,7 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "env-cmd -f .env.production ts-node index.ts",
+    "start": "env-cmd -f .env.production node ./dist/index.js",
     "dev": "env-cmd -f .env.development nodemon index.ts",
     "prisma:migrate": "env-cmd -f .env.development npx prisma migrate dev --name",
     "prisma:generate": "npx prisma generate",
