@@ -1,7 +1,7 @@
 import express from "express";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import db from "./config/db.js";
+// import db from "./config/db.js";
 import router from "./router/index.js";
 
 const app = express();
@@ -19,7 +19,7 @@ const staticPath = path.join(__dirname, "/public");
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
-    db.end();
+    // db.end();
   } catch (err) {
     console.log(err);
   }
