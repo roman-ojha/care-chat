@@ -5,9 +5,8 @@ const router = express.Router();
 
 router.use("/user", userRouter);
 
-console.log(process.env.PORT);
 router.get("/", (req, res) => {
-  res.render("index", { api_port: process.env.PORT });
+  res.render("index", { apiBaseUrl: process.env.API_BASE_URL });
 });
 
 export default router;

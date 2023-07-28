@@ -1,7 +1,7 @@
 const createUser = async () => {
   try {
     const username = window.prompt("Enter you username: ");
-    const res = await fetch(`http://localhost:${api_port}/user`, {
+    const res = await fetch(`${apiBaseUrl}/user`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -26,7 +26,7 @@ const createUser = async () => {
 };
 
 if (createUser()) {
-  var socket = io(`http://localhost:${api_port}`);
+  var socket = io(`${apiBaseUrl}`);
   socket.on("connect", () => {
     console.log(`you are connected with id: ${socket.id}`);
   });
