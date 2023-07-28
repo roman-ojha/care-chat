@@ -17,13 +17,14 @@ const io = new Server(server, {
 });
 const PORT = process.env.PORT || 8080;
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const staticPath = path.join(__dirname, "/public");
 io.use(socketCookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(staticPath));
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "/view"));
+app.use("/static", express.static(path.join(__dirname, "/node_modules")));
+const staticPath = path.join(__dirname, "/public");
+app.use("/public", express.static(staticPath));
 app.use(router);
 handleSocket(io);
 server.listen(PORT, () => {

@@ -25,6 +25,7 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "socket.io": "^4.7.1",
+    "socket.io-client": "^4.7.1",
     "socket.io-cookie-parser": "^1.0.0"
   },
   "devDependencies": {
