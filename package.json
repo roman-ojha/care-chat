@@ -5,6 +5,9 @@
   "author": "roman-ojha",
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "copy:views": "copyfiles -u 1 ./views/**/* ./dist/views",
     "copy:static": "copyfiles -u 1 ./public/**/* ./dist/public",
