@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               Int            @id @default(autoincrement())
+  phone_no         Int?
+  date_joined      DateTime       @default(now())
+  is_valid_number  Boolean        @default(true)
+  verification_otp String?
+  otp_expires_on   DateTime?
+  updated_at       DateTime?
+  Chat             Chat[]
+  Sessions         Session[]
+  Subscription     Subscription[]
+}
+
+model Category {
+  id           Int            @id @default(autoincrement())
+  name         String
+  created_at   DateTime       @default(now())
+  updated_at   DateTime?
+  Chat         Chat[]
+  Subscription Subscription[]
+}
+
+model Chat {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [user_id], references: [id])
+  user_id     Int       @unique
+  category    Category  @relation(fields: [category_id], references: [id])
+  category_id Int
+  desc        String
+  created_at  DateTime  @default(now())
+  updated_at  DateTime?
+}
+
+model Session {
+  id         String    @unique
+  user       User      @relation(fields: [user_id], references: [id])
+  user_id    Int
+  expires_on DateTime
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+}
+
+model Subscription {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [user_id], references: [id])
+  user_id     Int
+  category    Category  @relation(fields: [category_id], references: [id])
+  category_id Int
+  created_at  DateTime  @default(now())
+  updated_at  DateTime?
+}
