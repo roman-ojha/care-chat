@@ -1,7 +1,6 @@
 import express from "express";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-// import db from "./config/db.js";
 import router from "./router/index.js";
 import { Server } from "socket.io";
 import { createServer } from "http";
@@ -32,5 +31,3 @@ server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 connect();
-
-// db.end();

@@ -25,13 +25,45 @@ body {
 #chat-container {
   width: 50vw;
   height: 80vh;
-  border: 3px solid white;
+  border: 2px solid white;
   border-radius: 10px;
+  position: relative;
 }
 
 #chat-container div {
 }
+#chat-container form {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  /* border: 2px solid white; */
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 #chat-container form input[type="text"] {
   background-color: transparent;
+  /* border: 2px solid white; */
+  border-width: 0px;
+  width: 50%;
+  background-color: rgb(110, 110, 110);
+  border-radius: 5px;
+  height: 30px;
+}
+
+#chat-container form input[type="text"]:read-write {
+  color: white;
+  padding: 10px;
+  font-size: 15px;
+}
+
+#chat-container form input[type="text"]::placeholder {
+  color: white;
+}
+
+#chat-container form svg {
+  margin-left: 10px;
+  cursor: pointer;
 }
