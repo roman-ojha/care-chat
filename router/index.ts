@@ -3,7 +3,8 @@ import userRouter from "./user.js";
 
 const router = express.Router();
 
-router.use(userRouter);
+router.use("/user", userRouter);
+
 router.get("/", (req, res) => {
   res.render("index", {});
 });
