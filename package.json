@@ -5,6 +5,9 @@
   "author": "roman-ojha",
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "env-cmd -f .env.production ts-node index.ts",
     "dev": "env-cmd -f .env.development nodemon index.ts",
