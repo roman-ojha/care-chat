@@ -1,6 +1,8 @@
 var messages = [];
 var username = localStorage.getItem("username");
 var socket = io(`${apiBaseUrl}`);
+var chats = "";
+const chatViewElm = document.getElementById("chat-view");
 
 const checkUser = async () => {
   // Check user
@@ -10,7 +12,6 @@ const checkUser = async () => {
   });
   if (res.status != 200) return false;
   const user = await res.json();
-  console.log(user);
   return true;
 };
 
@@ -45,7 +46,27 @@ const createUser = async () => {
 (async () => {
   if (!(await checkUser())) {
     createUser();
+    return;
   }
+  socket.on("connect", () => {
+    console.log(`you are connected with id: ${socket.id}`);
+  });
+  // const category_name = "group";
+  // socket.emit("join-room", category_name, (message) => {
+  //   console.log(message);
+  // });
+  socket.on("send-message-client", (data) => {
+    chats += `
+          <div class="single-chat">
+            <p>${data.username}</p>
+            <div>
+              <p>${data.message}</p>
+            </div>
+          </div>
+          `;
+    chatViewElm.innerHTML = chats;
+    chatViewElm.scrollTop = chatViewElm.scrollHeight;
+  });
 })();
 
 const getAndRenderMessage = async () => {
@@ -55,10 +76,7 @@ const getAndRenderMessage = async () => {
     });
     messages = await res.json();
     if (res.status == 200) {
-      const chatViewElm = document.getElementById("chat-view");
-      let chats = "";
       messages.forEach((value, key) => {
-        console.log(value);
         chats += `
           <div class="single-chat" ${
             value.user.username == username ? 'data-type="user"' : ""
@@ -71,21 +89,36 @@ const getAndRenderMessage = async () => {
         `;
       });
       chatViewElm.innerHTML = chats;
+      chatViewElm.scrollTop = chatViewElm.scrollHeight;
     }
   } catch (err) {
     console.log(err);
   }
 };
+
 getAndRenderMessage();
 
 async function sendMessage(event) {
   event.preventDefault();
   const inputField = document.getElementById("chat-input-field");
-  console.log(inputField.value);
-  try {
-    socket.on("connect", () => {
-      console.log(`you are connected with id: ${socket.id}`);
-    });
-  } catch (err) {}
+  const message = inputField.value;
+  if (message !== "") {
+    try {
+      socket.emit("send-message", { username, message }, (res) => {
+        if (res.success) {
+          chats += `
+          <div class="single-chat" data-type="user">
+            <p>${username}</p>
+            <div>
+              <p>${message}</p>
+            </div>
+          </div>
+          `;
+          chatViewElm.innerHTML = chats;
+          chatViewElm.scrollTop = chatViewElm.scrollHeight;
+        }
+      });
+    } catch (err) {}
+  }
   inputField.value = "";
 }
