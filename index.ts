@@ -28,6 +28,6 @@ app.use("/public", express.static(staticPath));
 app.use(router);
 handleSocket(io);
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running: http://localhost:${PORT}`);
 });
 connect();

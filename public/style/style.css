@@ -30,8 +30,6 @@ body {
   position: relative;
 }
 
-#chat-container div {
-}
 #chat-container form {
   position: absolute;
   bottom: 10px;
@@ -66,4 +64,42 @@ body {
 #chat-container form svg {
   margin-left: 10px;
   cursor: pointer;
+}
+
+#chat-view {
+  /* border: 1px solid red; */
+  height: 90%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: end;
+}
+
+.single-chat {
+  max-width: 40%;
+  /* border: 1px solid blue; */
+  margin-top: 15px;
+}
+
+.single-chat div {
+  padding: 5px 10px;
+  background-color: rgb(44, 44, 119);
+  border-radius: 5px;
+  width: fit-content;
+}
+
+.single-chat[data-type="user"] {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.single-chat[data-type="user"] div {
+  padding: 5px 10px;
+  background-color: rgb(175, 29, 29);
+  border-radius: 5px;
+  width: fit-content;
 }
