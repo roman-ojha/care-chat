@@ -1,8 +1,9 @@
 var messages = [];
+var username = localStorage.getItem("username");
+var socket = io(`${apiBaseUrl}`);
 
 const checkUser = async () => {
   // Check user
-  const username = localStorage.getItem("username");
   if (!username) return false;
   const res = await fetch(`${apiBaseUrl}/api/user/check/${username}`, {
     method: "GET",
@@ -12,8 +13,6 @@ const checkUser = async () => {
   console.log(user);
   return true;
 };
-
-checkUser();
 
 const createUser = async () => {
   try {
@@ -28,6 +27,7 @@ const createUser = async () => {
     const body = await res.json();
     if (res.status == 200) {
       localStorage.setItem("username", body.username);
+      username = body.username;
       return true;
     } else {
       if (body.msg) {
@@ -42,6 +42,12 @@ const createUser = async () => {
   }
 };
 
+(async () => {
+  if (!(await checkUser())) {
+    createUser();
+  }
+})();
+
 const getAndRenderMessage = async () => {
   try {
     const res = await fetch(`${apiBaseUrl}/api/message`, {
@@ -50,8 +56,6 @@ const getAndRenderMessage = async () => {
     messages = await res.json();
     if (res.status == 200) {
       const chatViewElm = document.getElementById("chat-view");
-      const username = localStorage.getItem("username");
-      console.log(username);
       let chats = "";
       messages.forEach((value, key) => {
         console.log(value);
@@ -72,21 +76,16 @@ const getAndRenderMessage = async () => {
     console.log(err);
   }
 };
-
-// getAndRenderMessage();
-
-// if (createUser()) {
-//   var socket = io(`${apiBaseUrl}`);
-//   socket.on("connect", () => {
-//     console.log(`you are connected with id: ${socket.id}`);
-//   });
-// }
+getAndRenderMessage();
 
 async function sendMessage(event) {
   event.preventDefault();
   const inputField = document.getElementById("chat-input-field");
   console.log(inputField.value);
   try {
+    socket.on("connect", () => {
+      console.log(`you are connected with id: ${socket.id}`);
+    });
   } catch (err) {}
   inputField.value = "";
 }
