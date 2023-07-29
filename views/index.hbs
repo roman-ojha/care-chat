@@ -10,34 +10,19 @@
       <h1 id="main-heading"> Real Time Group Chat App</h1>
       <div id="chat-container">
         <div id="chat-view">
-          <div class="single-chat">
-            <p>roman</p>
-            <div>
-              <p>hello world and the another thing</p>
-            </div>
-          </div>
-          <div class="single-chat">
-            <p>roman</p>
-            <div>
-              <p>hello world</p>
-            </div>
-          </div>
           <div class="single-chat" data-type="user">
             <p>roman</p>
             <div>
               <p>Lorem, ipsum dolor sit amet consectetur </p>
             </div>
           </div>
-          <div class="single-chat">
-            <p>roman</p>
-            <div>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex
-                excepturi ipsa distinctio omnis, quos veritatis!</p>
-            </div>
-          </div>
         </div>
-        <form id="chat-send">
-          <input type="text" placeholder="write somethings" />
+        <form id="chat-send" onsubmit="sendMessage(event)">
+          <input
+            id="chat-input-field"
+            type="text"
+            placeholder="write somethings"
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -60,6 +45,6 @@
     <script>
       const apiBaseUrl = `{{apiBaseUrl}}`;
     </script>
-    {{! <script src="public/script/script.js"></script> }}
+    <script src="public/script/script.js"></script>
   </body>
 </html>

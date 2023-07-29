@@ -2,12 +2,14 @@
 CREATE TABLE `User` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `phone_no` INTEGER NULL,
+    `username` VARCHAR(191) NOT NULL,
     `date_joined` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `is_valid_number` BOOLEAN NOT NULL DEFAULT true,
     `verification_otp` VARCHAR(191) NULL,
     `otp_expires_on` DATETIME(3) NULL,
     `updated_at` DATETIME(3) NULL,
 
+    UNIQUE INDEX `User_username_key`(`username`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -30,7 +32,6 @@ CREATE TABLE `Chat` (
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NULL,
 
-    UNIQUE INDEX `Chat_user_id_key`(`user_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

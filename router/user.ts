@@ -26,4 +26,26 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/check/:username", async (req, res) => {
+  try {
+    const isUser = await prisma.user.findFirst({
+      where: {
+        username: req.params.username,
+      },
+      select: {
+        id: true,
+        username: true,
+      },
+    });
+    if (!isUser) {
+      return res.status(400).send({ msg: "UnAuthorized User" });
+    }
+    return res.send(isUser);
+  } catch (err) {
+    return res
+      .status(500)
+      .send({ msg: "Something went wrong please try again later" });
+  }
+});
+
 export default router;
