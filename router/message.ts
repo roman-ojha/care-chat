@@ -16,6 +16,10 @@ router.get("/", async (req, res) => {
         id: true,
         desc: true,
       },
+      take: 15,
+      orderBy: {
+        created_at: "desc",
+      },
     });
     return res.send(messages);
   } catch (err) {

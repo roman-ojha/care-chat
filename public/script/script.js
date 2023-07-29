@@ -17,13 +17,13 @@ const checkUser = async () => {
 
 const createUser = async () => {
   try {
-    const username = window.prompt("Enter you username: ");
+    const uname = window.prompt("Enter you username: ");
     const res = await fetch(`${apiBaseUrl}/api/user`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ username }),
+      body: JSON.stringify({ username: uname }),
     });
     const body = await res.json();
     if (res.status == 200) {
@@ -48,15 +48,17 @@ const createUser = async () => {
     createUser();
     return;
   }
-  socket.on("connect", () => {
-    console.log(`you are connected with id: ${socket.id}`);
-  });
-  // const category_name = "group";
-  // socket.emit("join-room", category_name, (message) => {
-  //   console.log(message);
-  // });
-  socket.on("send-message-client", (data) => {
-    chats += `
+})();
+
+socket.on("connect", () => {
+  console.log(`you are connected with id: ${socket.id}`);
+});
+// const category_name = "group";
+// socket.emit("join-room", category_name, (message) => {
+//   console.log(message);
+// });
+socket.on("send-message-client", (data) => {
+  chats += `
           <div class="single-chat">
             <p>${data.username}</p>
             <div>
@@ -64,10 +66,9 @@ const createUser = async () => {
             </div>
           </div>
           `;
-    chatViewElm.innerHTML = chats;
-    chatViewElm.scrollTop = chatViewElm.scrollHeight;
-  });
-})();
+  chatViewElm.innerHTML = chats;
+  chatViewElm.scrollTop = chatViewElm.scrollHeight;
+});
 
 const getAndRenderMessage = async () => {
   try {
@@ -75,6 +76,7 @@ const getAndRenderMessage = async () => {
       method: "GET",
     });
     messages = await res.json();
+    messages.reverse();
     if (res.status == 200) {
       messages.forEach((value, key) => {
         chats += `
@@ -98,12 +100,12 @@ const getAndRenderMessage = async () => {
 
 getAndRenderMessage();
 
-async function sendMessage(event) {
-  event.preventDefault();
+async function sendMessage() {
   const inputField = document.getElementById("chat-input-field");
   const message = inputField.value;
   if (message !== "") {
     try {
+      console.log("Username: ", username);
       socket.emit("send-message", { username, message }, (res) => {
         if (res.success) {
           chats += `
@@ -121,4 +123,9 @@ async function sendMessage(event) {
     } catch (err) {}
   }
   inputField.value = "";
+}
+
+function submitMessage(event) {
+  event.preventDefault();
+  sendMessage();
 }
