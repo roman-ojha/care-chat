@@ -14,6 +14,7 @@ class MessageController {
           user: {
             select: {
               id: true,
+              phone_no_id: true,
             },
           },
           id: true,
@@ -26,14 +27,12 @@ class MessageController {
       });
       return res.send(messages);
     } catch (err) {
-      return res
-        .status(500)
-        .send(
-          response({
-            success: false,
-            msg: "Something went wrong please try again later",
-          })
-        );
+      return res.status(500).send(
+        response({
+          success: false,
+          msg: "Something went wrong please try again later",
+        })
+      );
     }
   }
 }

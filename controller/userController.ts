@@ -7,7 +7,7 @@ class UserController {
     try {
       const { phone_no_id } = req.body;
       if (!phone_no_id) {
-        return res.status(400).send(
+        return res.status(406).send(
           response({
             success: true,
             msg: "Phone no Id is required",
@@ -18,19 +18,19 @@ class UserController {
         where: { phone_no_id: phone_no_id },
       });
       if (isUser) {
-        return res.status(400).send(
+        return res.status(406).send(
           response({
             success: false,
-            msg: "Phone no Id Already exist please use another one",
+            msg: "User with given Phone no Id Already been created",
           })
         );
       }
       const resUser = await prisma.user.create({
-        data: { phone_no_id: "x" },
+        data: { phone_no_id },
       });
-      return res.send({
-        username: `CARE-${resUser.id}-${resUser.phone_no_id}`,
-      });
+      return res.send(
+        response({ success: true, msg: "User Created Successfully" })
+      );
     } catch (err) {
       return res.status(500).send(
         response({
