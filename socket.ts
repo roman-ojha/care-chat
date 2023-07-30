@@ -9,7 +9,7 @@ export function handleSocket(io: Server) {
       async (messageInfo: { username: string; message: string }, cb) => {
         const userRes = await prisma.user.findFirst({
           where: {
-            username: messageInfo.username,
+            // username: messageInfo.username,
           },
         });
         if (!userRes) {
@@ -31,7 +31,7 @@ export function handleSocket(io: Server) {
           },
         });
         socket.broadcast.emit("send-message-client", {
-          username: userRes.username,
+          // username: userRes.username,
           message: messageInfo.message,
         });
         // socket.to("group").emit("send-message-client", {

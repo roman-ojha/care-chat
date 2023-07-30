@@ -3,20 +3,23 @@ import { prisma } from "../config/prisma.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/:category_id", async (req, res) => {
   try {
+    const category_id = parseInt(req.params.category_id);
     const messages = await prisma.chat.findMany({
+      where: {
+        category_id: category_id,
+      },
       select: {
         user: {
           select: {
             id: true,
-            username: true,
           },
         },
         id: true,
         desc: true,
       },
-      take: 15,
+      take: 20,
       orderBy: {
         created_at: "desc",
       },

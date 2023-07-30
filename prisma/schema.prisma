@@ -11,17 +11,14 @@ datasource db {
 }
 
 model User {
-  id               Int            @id @default(autoincrement())
-  phone_no         Int?
-  username         String         @unique // For current application we don't have phone_no for the user so we will use username to identify the user
-  date_joined      DateTime       @default(now())
-  is_valid_number  Boolean        @default(true)
-  verification_otp String?
-  otp_expires_on   DateTime?
-  updated_at       DateTime?
-  Chat             Chat[]
-  Sessions         Session[]
-  Subscription     Subscription[]
+  id           Int            @id @default(autoincrement())
+  phone_no_id  String         @unique
+  // username     String         @unique
+  date_joined  DateTime       @default(now())
+  updated_at   DateTime?
+  Chat         Chat[]
+  Sessions     Session[]
+  Subscription Subscription[]
 }
 
 model Category {

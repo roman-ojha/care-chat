@@ -19,6 +19,7 @@
     "vercel-build": "npm run prisma:generate",
     "prisma:studio": "env-cmd -f .env.development npx prisma studio",
     "prisma:push-prod": "env-cmd -f .env.production npx prisma db push",
+    "prisma:push": "env-cmd -f .env.development npx prisma db push",
     "prisma:studio-prod": "env-cmd -f .env.production npx prisma studio"
   },
   "dependencies": {
