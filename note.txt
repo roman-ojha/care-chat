@@ -1,7 +1,0 @@
-*) Architecture:
-    -> For real time chat application, We can use Microservice architecture rather then Monolithic To handle many request at a time, by dividing the application server to multiple instances or dividing the aplication services to different micro services also to scale the database we can use partitioning and sharding techniques rather then do replication of the same database instance because just by replication won't help to query & mange stored huge amount of chat data.
-    
-=> Also we can build a Client-Server Architecture for real time chat application, where we can use Socket.io for real time communication between client and server.
-=> For the Design pattern of the server side, we can use MVC (Model-View-Controller) pattern.
-
-=> But for this example I will just use simple monolithic architecture and SQL database.

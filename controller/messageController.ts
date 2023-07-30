@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../config/prisma.js";
+import { response } from "../utils/response.js";
 
 class MessageController {
   async getMessage(req: Request, res: Response) {
@@ -27,7 +28,12 @@ class MessageController {
     } catch (err) {
       return res
         .status(500)
-        .send({ msg: "Something went wrong please try again later" });
+        .send(
+          response({
+            success: false,
+            msg: "Something went wrong please try again later",
+          })
+        );
     }
   }
 }
