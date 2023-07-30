@@ -10,7 +10,7 @@ router.use("/api/message", messageRouter);
 router.use("/api/category", categoryRouter);
 
 router.get("/", (req, res) => {
-  res.render("index", { apiBaseUrl: process.env.API_BASE_URL });
+  res.send("Hello this is care chat app");
 });
 
 export default router;
